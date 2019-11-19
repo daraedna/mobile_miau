@@ -6,6 +6,7 @@ import api from '../services/api'
 import logo from '../assets/logo.png'
 
 export default function Login({ navigation }) {
+    
     const [email, setEmail] = useState('');
     const [password, setPass] = useState('');
 
