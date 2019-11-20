@@ -7,6 +7,7 @@ export default function AnimalList({ animals }) {
         <ScrollView  style={styles.container}>
  
             <Text onPress={() => AsyncStorage.clear()}>  Sair </Text>
+
             <Text style={styles.title}>Animais</Text>
             {
                 animals.map(animals => {
@@ -32,26 +33,26 @@ export default function AnimalList({ animals }) {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 30,
+        marginTop: 32,
     },
 
     title: {
         fontSize: 20,
         color: '#444',
         paddingHorizontal:20,
-        marginBottom: 15,
+        marginBottom: 16,
         fontWeight: 'bold'
     },
 
     listItem: {
-        paddingHorizontal: 15
+        paddingBottom: 20,
     },
 
     img: {
-       width: 200,
-       height: 200,
-       resizeMode: 'contain',
-       borderRadius: 2,
+       width: '100%',
+       height: 250,
+       resizeMode: 'cover',
+       marginLeft: 0,
     }
 
 

@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
 
     form: {
         alignSelf: 'stretch',
-        paddingHorizontal: 30,
-        marginTop: 30
+        paddingHorizontal: 32,
+        marginTop: 32
     },
 
     label: {
