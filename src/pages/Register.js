@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
 import {View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView, KeyboardAvoidingView} from 'react-native';
 import Modal from "react-native-modal";
+import * as ImagePicker from 'expo-image-picker';
+
 
 import api from '../services/api';
 
 import logo from '../assets/logo.png'
+
 
 export default function Register( {navigation} ) {
  
@@ -14,29 +17,63 @@ export default function Register( {navigation} ) {
     const [phone, setPhone] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
-    const [error, setError] = useState(true)
+    const [error, setError] = useState(false);
+    const [img_user, setImgUser] = useState(null);
 
+    async function handleChoosePhoto(){
+        const image = await ImagePicker.launchImageLibraryAsync({
+        });
+        console.log(image)
+        if (image.uri) {
+           return setImgUser(image);
+        }
+
+    }
 
     async function handleRegister(event){
         
         event.preventDefault();
+        
 
-        try {
-            const {data} = await api.post('/register', { name, email, password, phone, city, state })
-            const {error} = data;
+        const localUri = img_user.uri;
+        const filename = localUri.split('/').pop();
+       
+        const match = /\.(\w+)$/.exec(filename);
+        const type = match ? `img_user/${match[1]}` : `img_user`;
+
+        const formData = new FormData();
+        formData.append('img_user', { uri: localUri, name: filename });
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('phone', phone);
+        formData.append('city', city);
+        formData.append('state', state);
+
+        console.log(formData);
+        return await fetch('http://10.0.0.104:3331/register', {
+            method: 'POST',
+            body: formData,
+            header: {
+              'content-type': 'multipart/form-data',
+            },
+          });
+        // try {
+        //     // const {data} = await api.post('/register', { img_user: File , name, email, password, phone, city, state })  
+        //     const {error} = data;
             
-            // console.log(error);
+        //     // console.log(data);
 
-            if(error){
-                await setError(true);
-            }else{
-                navigation.navigate('Login');
-            }
-        } catch (error) {
-            console.log(error);
-        }
+        //     if(error){
+        //         await setError(true);
+        //     }else{
+        //         navigation.navigate('Login');
+        //     }
+        // } catch (error) {
+        //     console.log(error);
+        // }
     }
-
+    
     return (
     <ScrollView>
 
@@ -56,6 +93,19 @@ export default function Register( {navigation} ) {
         }
         
             <Image source={logo} />
+
+            <View style ={styles.choosePhoto}>
+                {img_user &&(
+                    <Image style ={styles.preview}
+                        source= {img_user}
+
+                    />
+                )}
+                <TouchableOpacity 
+                onPress={() => {handleChoosePhoto('image.uri')}}>
+                    <Text style={styles.cancel}>Escolha uma foto</Text>
+                </TouchableOpacity>
+            </View>
 
             <View style ={styles.form}>
     
@@ -95,6 +145,7 @@ export default function Register( {navigation} ) {
                 <TextInput style ={styles.input}
                     placeholder="Telefone p/ contato"
                     placeholderTextColor="#999"
+                    // keyboardType="tel"
                     autoCapitalize="none"
                     autoCorrect={false}
                     value={phone}
@@ -146,6 +197,20 @@ const styles = StyleSheet.create({
         marginBottom: 32,
         justifyContent: 'center',
         alignItems : 'center'
+    },
+    choosePhoto: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        
+
+    },
+
+    preview: {
+        width: 200,
+        height: 200,
+        marginTop: 16,
+        borderRadius: 100,
     },
 
     modal: {
