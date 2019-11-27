@@ -34,15 +34,14 @@ export default function Register( {navigation} ) {
         
         event.preventDefault();
         
-
-        const localUri = img_user.uri;
-        const filename = localUri.split('/').pop();
+        // const localUri = img_user.uri;
+        // const filename = localUri.split('/').pop();
        
-        const match = /\.(\w+)$/.exec(filename);
-        const type = match ? `img_user/${match[1]}` : `img_user`;
+        // const match = /\.(\w+)$/.exec(filename);
+        // const type = match ? `img_user/${match[1]}` : `img_user`;
 
         const formData = new FormData();
-        formData.append('img_user', { uri: localUri, name: filename });
+        formData.append('imgUser', img_user);
         formData.append('name', name);
         formData.append('email', email);
         formData.append('password', password);
@@ -50,14 +49,28 @@ export default function Register( {navigation} ) {
         formData.append('city', city);
         formData.append('state', state);
 
-        console.log(formData);
-        return await fetch('http://10.0.0.104:3331/register', {
-            method: 'POST',
-            body: formData,
-            header: {
-              'content-type': 'multipart/form-data',
-            },
-          });
+        // navigation.navigate('Login');
+        // console.log(formData);
+        
+        // const request = new XMLHttpRequest();
+        
+        // console.log(formData);
+        // console.log('XHMLTTP:', request);
+
+        // await request.open('POST', 'http://10.0.0.104:3331/register');
+        // await request.send(formData);
+
+        await api.post('/register', {
+            formData
+        });
+        
+        // await fetch('http://10.0.0.104:3331/register', {
+        //     method: 'post',
+        //     body: formData,
+        //     header: {
+        //       'content-type': 'multipart/form-data',
+        //     },
+        //   });
         // try {
         //     // const {data} = await api.post('/register', { img_user: File , name, email, password, phone, city, state })  
         //     const {error} = data;
