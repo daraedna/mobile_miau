@@ -34,35 +34,34 @@ export default function Register( {navigation} ) {
         
         event.preventDefault();
         
-        // const localUri = img_user.uri;
-        // const filename = localUri.split('/').pop();
+         const localUri = img_user.uri;
+         const filename = localUri.split('/').pop();
        
-        // const match = /\.(\w+)$/.exec(filename);
-        // const type = match ? `img_user/${match[1]}` : `img_user`;
+        const match = /\.(\w+)$/.exec(filename);
+        const types = match ? `img_user/${match[1]}` : `img_user`;
 
-        const formData = new FormData();
-        formData.append('imgUser', img_user);
-        formData.append('name', name);
-        formData.append('email', email);
-        formData.append('password', password);
-        formData.append('phone', phone);
-        formData.append('city', city);
-        formData.append('state', state);
+        const data = new FormData();
+
+        data.append('img_user', {
+            uri: img_user.uri.replace("file:/", "")
+        });
+        data.append('name', name);
+        data.append('email', email);
+        data.append('password', password);
+        data.append('phone', phone);
+        data.append('city', city);
+        data.append('state', state);
 
         // navigation.navigate('Login');
-        // console.log(formData);
-        
+
         // const request = new XMLHttpRequest();
         
-        // console.log(formData);
         // console.log('XHMLTTP:', request);
 
         // await request.open('POST', 'http://10.0.0.104:3331/register');
         // await request.send(formData);
-
-        await api.post('/register', {
-            formData
-        });
+        console.log(data);
+        await api.post('/register', data);
         
         // await fetch('http://10.0.0.104:3331/register', {
         //     method: 'post',

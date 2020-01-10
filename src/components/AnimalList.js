@@ -1,12 +1,13 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, AsyncStorage} from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, AsyncStorage, TouchableOpacity} from 'react-native';
 
 export default function AnimalList({ animals }) {
+
+
     return(
 
         <ScrollView  style={styles.container}>
- 
-            <Text onPress={() => AsyncStorage.clear()}>  Sair </Text>
+
 
             <Text style={styles.title}>Animais</Text>
             {

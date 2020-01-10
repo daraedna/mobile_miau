@@ -1,14 +1,23 @@
 import React, { useState, useEffect} from 'react';
-import {SafeAreaView, View, Text, StyleSheet,Image, AsyncStorage} from 'react-native';
+import {SafeAreaView, View, Text, StyleSheet,Image, AsyncStorage, TouchableOpacity} from 'react-native';
 import api from '../services/api'
 
 import AnimalList from '../components/AnimalList'
 
 import logo from '../assets/logo.png'
+import back from '../../assets/icons/back.png'
 
-export default function List() {
+export default function List( {navigation} ) {
+
+    logout = async () => {
+        await AsyncStorage.clear();
+        navigation.navigate('Login');
+      };
+
+
     const [animals, setAnimals] = useState([]);
     const [username, setUsername] = useState('');
+
     
     const fetchData = async() => {
         const response = await api.get('/animals');
@@ -27,7 +36,18 @@ export default function List() {
     }, []);
 return (
     <SafeAreaView style={styles.container}>
-        <Image style={styles.logo} source= {logo} />
+        <View style={styles.header}> 
+
+        <TouchableOpacity style={styles.logout} onPress={logout}>
+                 <Image source= {back}/>
+        </TouchableOpacity>
+            
+        
+            <Image style={styles.logo} source= {logo} />
+
+            <Text style={styles.profile} > PERFIL </Text>
+
+        </View>
 
         <AnimalList animals={animals}></AnimalList>
     </SafeAreaView>
@@ -36,13 +56,29 @@ return (
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+    },
+
+    header: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignSelf: 'center',
+        alignItems:'center',
+        justifyContent: 'space-around',
+        marginTop: 30,
     },
 
     logo: {
-        height: 32,
-        resizeMode: "contain",
-        marginTop: 32,
-        
-    }
+    
+    }, 
+
+    logout: {
+
+    },
+
+    profile: {
+      
+    },
 });
