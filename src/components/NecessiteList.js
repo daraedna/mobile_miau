@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ScrollView} from 'react-native';
 
-export default function AnimalList({ animals }) {
+export default function NecessiteList({ necessities }) {
 
 
     return(
@@ -9,18 +9,20 @@ export default function AnimalList({ animals }) {
         <ScrollView  style={styles.container}>
 
 
-            <Text style={styles.title}>Animais</Text>
+            <Text style={styles.title}>Necessidades</Text>
             {
-                animals.map(animals => {
-                    
+                necessities.map(necessities => {
                     return(
                         
-                        <View key={animals._id}>
+                        <View key={necessities.id}>
 
                             <View style={styles.listItem}>
-                                <Image style={styles.img} source={{ uri: animals.img_url.replace('localhost', '10.0.0.104') }} />
-                                <Text style={styles.owner}>{animals.user}</Text>
-                                <Text style={styles.breed}>{animals.breed}</Text>
+                                 <Image style={styles.img} source= { {uri: necessities.img_nec_url }}></Image>
+                                <Text style={styles.owner}>{necessities.name}</Text>
+                               
+                                <Text style={styles.breed}>{necessities.inst}</Text>
+                                <Text style={styles.breed}>{necessities.qtd}</Text>
+                                <Text style={styles.breed}>{necessities.uni_medida}</Text>
                             </View>
 
 
@@ -47,6 +49,7 @@ const styles = StyleSheet.create({
 
     listItem: {
         paddingBottom: 20,
+
     },
 
     img: {

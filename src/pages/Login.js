@@ -13,7 +13,7 @@ export default function Login({ navigation }) {
     useEffect(() => {
         AsyncStorage.getItem('user_id').then (user => {
             if (user) {
-                navigation.navigate('Index');
+                navigation.navigate('Animals');
             }
         })
     }, []);
@@ -31,7 +31,7 @@ export default function Login({ navigation }) {
         await AsyncStorage.setItem('phone', JSON.stringify(user.phone));
         await AsyncStorage.setItem('token', token);
 
-        navigation.navigate('Index');
+        navigation.navigate('Animals');
     }
 
     return(

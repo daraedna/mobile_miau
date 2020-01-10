@@ -22,8 +22,6 @@ export default function List( {navigation} ) {
     const fetchData = async() => {
         const response = await api.get('/animals');
 
-        // console.log(response.data.animals);
-
         await setAnimals(response.data.animals);
     }
 

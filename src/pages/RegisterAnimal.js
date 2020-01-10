@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView, KeyboardAvoidingView} from 'react-native';
-import Modal from "react-native-modal";
 import * as ImagePicker from 'expo-image-picker';
 
 
@@ -9,16 +8,15 @@ import api from '../services/api';
 import logo from '../assets/logo.png'
 
 
-export default function Register( {navigation} ) {
+export default function RegisterAnimal( {navigation} ) {
  
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [phone, setPhone] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [error, setError] = useState(false);
-    const [img_user, setImgUser] = useState(null);
+    const [species, setSpecies] = useState('');
+    const [breed, setBreed] = useState('');
+    const [age, setAge] = useState('');
+    const [observation, setObservation] = useState('');
+    const [sex, setSex] = useState('');
+    const [size, setSize] = useState('');
+    const [img, setImg] = useState(null);
 
     async function handleChoosePhoto(){
         const image = await ImagePicker.launchImageLibraryAsync({
@@ -26,7 +24,7 @@ export default function Register( {navigation} ) {
         });
         //console.log(image)
         if (image.base64) {
-           return setImgUser(image.base64);
+           return setImg(image.base64);
         }
 
     }
@@ -34,10 +32,10 @@ export default function Register( {navigation} ) {
     const handleRegister = () => {
 
         const data = {
-            name, email, password, phone, city, state, img_user
+            species, breed, age, observation, sex, size, img
         }
 
-        api.post('/register', data).then(resp => {
+        api.post('/animal', data).then(resp => {
             console.log('OK');            
             console.log(resp.data);            
         }).catch(err => {
@@ -46,7 +44,7 @@ export default function Register( {navigation} ) {
         })
 
 
-        navigation.navigate('Login');
+        navigation.navigate('Animals');
         
         
     }
@@ -55,26 +53,13 @@ export default function Register( {navigation} ) {
     <ScrollView>
 
         <KeyboardAvoidingView behavior="padding" style ={styles.container}>
-        {
-            error ? (
-                <Modal
-                    isVisible={error}
-                    onBackdropPress={() => setError(false)}
-                    swipeDirection="left"
-                    >
-                    <View style={styles.modal}>
-                        <Text style={styles.modalText}>Usuário já cadastrado</Text>
-                    </View>
-              </Modal>
-            ) :null
-        }
         
             <Image source={logo} />
 
             <View style ={styles.choosePhoto}>
-                {img_user &&(
+                {img &&(
                     <Image style ={styles.preview}
-    source= {{uri: `data:image/jpeg;base64,${img_user}`}}
+    source= {{uri: `data:image/jpeg;base64,${img}`}}
 
                     />
                 )}
@@ -86,76 +71,71 @@ export default function Register( {navigation} ) {
 
             <View style ={styles.form}>
     
-                <Text style ={styles.label}>NOME *</Text>
+                <Text style ={styles.label}>ESPECIE *</Text>
                 <TextInput style ={styles.input}
-                    placeholder="Seu nome"
+                    placeholder="cachorro"
                     placeholderTextColor="#999"
                     autoCapitalize="none"
                     autoCorrect={false}
-                    value={name}
-                    onChangeText={setName}
-                />
-                    
-                <Text style ={styles.label}>E-MAIL *</Text>
-                <TextInput style ={styles.input}
-                    placeholder="Seu e-mail"
-                    placeholderTextColor="#999"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    value={email}
-                    onChangeText={setEmail}
+                    value={species}
+                    onChangeText={setSpecies}
                 />
 
-                <Text style ={styles.label}>SENHA *</Text>
+                <Text style ={styles.label}>RAÇA *</Text>
                 <TextInput style ={styles.input}
-                    placeholder="*****"
+                    placeholder="Labrador"
                     placeholderTextColor="#999"
                     autoCapitalize="none"
                     autoCorrect={false}
-                    secureTextEntry={true}
-                    value={password}
-                    onChangeText={setPassword}
+                    value={breed}
+                    onChangeText={setBreed}
                 />
 
-                <Text style ={styles.label}>CONTATO *</Text>
+                <Text style ={styles.label}>IDADE *</Text>
                 <TextInput style ={styles.input}
-                    placeholder="Telefone p/ contato"
+                    placeholder="1"
                     placeholderTextColor="#999"
-                    // keyboardType="tel"
                     autoCapitalize="none"
                     autoCorrect={false}
-                    value={phone}
-                    onChangeText={setPhone}
+                    value={age}
+                    onChangeText={setAge}
                 />
 
-                <Text style ={styles.label}>CIDADE *</Text>
+                <Text style ={styles.label}>OBSERVAÇÃO </Text>
                 <TextInput style ={styles.input}
-                    placeholder="Mossoró"
+                    placeholder="Muito docil"
                     placeholderTextColor="#999"
-                    autoCapitalize="words"
+                    autoCapitalize="none"
                     autoCorrect={false}
-                    value={city}
-                    onChangeText={setCity}
+                    value={observation}
+                    onChangeText={setObservation}
                 />
 
-                <Text style ={styles.label}>ESTADO *</Text>
+                <Text style ={styles.label}>SEXO *</Text>
                 <TextInput style ={styles.input}
-                    placeholder="RN"
+                    placeholder="Masculino"
                     placeholderTextColor="#999"
-                    autoCapitalize="words"
+                    autoCapitalize="none"
                     autoCorrect={false}
-                    value={state}
-                    onChangeText={setState}
-                />
+                    value={sex}
+                    onChangeText={setSex}
+                />   
+
+                <Text style ={styles.label}>SIZE *</Text>
+                <TextInput style ={styles.input}
+                    placeholder="Filhote"
+                    placeholderTextColor="#999"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    value={size}
+                    onChangeText={setSize}
+                /> 
+
 
                 <TouchableOpacity style ={styles.button} onPress={handleRegister}>
                         <Text style ={styles.buttonText}>Cadastrar</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.cancel}>Cancelar</Text>
-                </TouchableOpacity>
             </View>
 
         </KeyboardAvoidingView>
