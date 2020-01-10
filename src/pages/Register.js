@@ -22,35 +22,41 @@ export default function Register( {navigation} ) {
 
     async function handleChoosePhoto(){
         const image = await ImagePicker.launchImageLibraryAsync({
+            base64: true
         });
-        console.log(image)
-        if (image.uri) {
-           return setImgUser(image);
+        //console.log(image)
+        if (image.base64) {
+           return setImgUser(image.base64);
         }
 
     }
 
-    async function handleRegister(event){
+    const handleRegister = () => {
         
-        event.preventDefault();
+        //event.preventDefault();
         
-         const localUri = img_user.uri;
-         const filename = localUri.split('/').pop();
+        //  const localUri = img_user.uri;
+        //  const filename = localUri.split('/').pop();
        
-        const match = /\.(\w+)$/.exec(filename);
-        const types = match ? `img_user/${match[1]}` : `img_user`;
+        // const match = /\.(\w+)$/.exec(filename);
+        // const types = match ? `img_user/${match[1]}` : `img_user`;
 
-        const data = new FormData();
+        // const data = new FormData();
 
-        data.append('img_user', {
-            uri: img_user.uri.replace("file:/", "")
-        });
-        data.append('name', name);
-        data.append('email', email);
-        data.append('password', password);
-        data.append('phone', phone);
-        data.append('city', city);
-        data.append('state', state);
+        // data.append('img_user', {
+        //     uri: img_user.uri.replace("file:/", "")
+        // });
+        // data.append('name', name);
+        // data.append('email', email);
+        // data.append('password', password);
+        // data.append('phone', phone);
+        // data.append('city', city);
+        // data.append('state', state);
+
+
+        const data = {
+            name, email, password, phone, city, state, img_user
+        }
 
         // navigation.navigate('Login');
 
@@ -60,8 +66,14 @@ export default function Register( {navigation} ) {
 
         // await request.open('POST', 'http://10.0.0.104:3331/register');
         // await request.send(formData);
-        console.log(data);
-        await api.post('/register', data);
+        // console.log(data);
+        api.post('/register', data).then(resp => {
+            console.log('OK');            
+            console.log(resp.data);            
+        }).catch(err => {
+            console.log('error');            
+            console.log(err);            
+        })
         
         // await fetch('http://10.0.0.104:3331/register', {
         //     method: 'post',
@@ -109,7 +121,7 @@ export default function Register( {navigation} ) {
             <View style ={styles.choosePhoto}>
                 {img_user &&(
                     <Image style ={styles.preview}
-                        source= {img_user}
+    source= {{uri: `data:image/jpeg;base64,${img_user}`}}
 
                     />
                 )}
