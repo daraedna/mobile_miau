@@ -35,19 +35,7 @@ export default function List( {navigation} ) {
 
 return (
     <SafeAreaView style={styles.container}>
-        <View style={styles.header}> 
-
-        <TouchableOpacity style={styles.logout} onPress={logout}>
-                 <Image source= {back}/>
-        </TouchableOpacity>
-            
-        
-            <Image style={styles.logo} source= {logo} />
-
-            <Text style={styles.profile} > PERFIL </Text>
-
-        </View>
-
+         <Navbar> </Navbar>
         <NecessiteList necessities={necessities}></NecessiteList>
         
     </SafeAreaView>

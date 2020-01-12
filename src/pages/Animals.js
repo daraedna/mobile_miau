@@ -4,8 +4,9 @@ import api from '../services/api'
 
 import AnimalList from '../components/AnimalList'
 
-import logo from '../assets/logo.png'
-import back from '../../assets/icons/back.png'
+// import logo from '../assets/logo.png'
+// import back from '../../assets/icons/back.png'
+import Navbar from '../components/Navbar';
 
 export default function List( {navigation} ) {
 
@@ -34,7 +35,7 @@ export default function List( {navigation} ) {
     }, []);
 return (
     <SafeAreaView style={styles.container}>
-        <View style={styles.header}> 
+        {/* <View style={styles.header}> 
 
         <TouchableOpacity style={styles.logout} onPress={logout}>
                  <Image source= {back}/>
@@ -45,7 +46,9 @@ return (
 
             <Text style={styles.profile} > PERFIL </Text>
 
-        </View>
+        </View> */}
+
+        <Navbar> </Navbar>
 
         <AnimalList animals={animals}></AnimalList>
     </SafeAreaView>

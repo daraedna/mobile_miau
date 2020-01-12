@@ -1,14 +1,20 @@
 import React, {useState} from 'react';
-import {View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView, KeyboardAvoidingView} from 'react-native';
+import {View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView, KeyboardAvoidingView, AsyncStorage} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
 
 import api from '../services/api';
 
 import logo from '../assets/logo.png'
+import back from '../../assets/icons/back.png'
 
 
 export default function RegisterAnimal( {navigation} ) {
+
+    logout = async () => {
+        await AsyncStorage.clear();
+        navigation.navigate('Login');
+      };
  
     const [species, setSpecies] = useState('');
     const [breed, setBreed] = useState('');
@@ -29,13 +35,15 @@ export default function RegisterAnimal( {navigation} ) {
 
     }
 
-    const handleRegister = () => {
-
+    async function handleRegister (){
+        const user_id = AsyncStorage.setItem('user_id');
+        console.log(user_id)
         const data = {
             species, breed, age, observation, sex, size, img
         }
+        console.log(data);
 
-        api.post('/animal', data).then(resp => {
+       await api.post('/animal', data,  {headers: { user_id }}).then(resp => {
             console.log('OK');            
             console.log(resp.data);            
         }).catch(err => {
@@ -44,7 +52,7 @@ export default function RegisterAnimal( {navigation} ) {
         })
 
 
-        navigation.navigate('Animals');
+       // navigation.navigate('Animals');
         
         
     }
@@ -54,7 +62,18 @@ export default function RegisterAnimal( {navigation} ) {
 
         <KeyboardAvoidingView behavior="padding" style ={styles.container}>
         
-            <Image source={logo} />
+        <View style={styles.header}> 
+
+            <TouchableOpacity style={styles.logout} onPress={logout}>
+                <Image source= {back}/>
+                </TouchableOpacity>
+        
+
+                <Image style={styles.logo} source= {logo} />
+
+                <Text style={styles.profile} > PERFIL </Text>
+
+        </View>
 
             <View style ={styles.choosePhoto}>
                 {img &&(
@@ -135,6 +154,7 @@ export default function RegisterAnimal( {navigation} ) {
                 <TouchableOpacity style ={styles.button} onPress={handleRegister}>
                         <Text style ={styles.buttonText}>Cadastrar</Text>
                 </TouchableOpacity>
+                
 
             </View>
 

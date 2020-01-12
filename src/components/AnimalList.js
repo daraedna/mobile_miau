@@ -18,7 +18,7 @@ export default function AnimalList({ animals }) {
                         <View key={animals._id}>
 
                             <View style={styles.listItem}>
-                                <Image style={styles.img} source={{ uri: animals.img_url.replace('localhost', '10.0.0.104') }} />
+                                <Image style={styles.img} source={{ uri: animals.img_url.replace('localhost', '10.0.0.107') }} />
                                 <Text style={styles.owner}>{animals.user}</Text>
                                 <Text style={styles.breed}>{animals.breed}</Text>
                             </View>

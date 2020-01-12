@@ -5,6 +5,7 @@ import api from '../services/api'
 
 import logo from '../assets/logo.png'
 
+
 export default function Login({ navigation }) {
     
     const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ export default function Login({ navigation }) {
     useEffect(() => {
         AsyncStorage.getItem('user_id').then (user => {
             if (user) {
-                navigation.navigate('Animals');
+                navigation.navigate('All');
             }
         })
     }, []);
@@ -25,13 +26,15 @@ export default function Login({ navigation }) {
         const { user, token } = data;
         const { id } = user;
 
+        console.log(id);
+
         await AsyncStorage.setItem('user_id', id);
         await AsyncStorage.setItem('name', user.name);
         await AsyncStorage.setItem('email', user.email);
         await AsyncStorage.setItem('phone', JSON.stringify(user.phone));
         await AsyncStorage.setItem('token', token);
 
-        navigation.navigate('Animals');
+        navigation.navigate('All');
     }
 
     return(

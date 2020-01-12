@@ -17,7 +17,7 @@ export default function NecessiteList({ necessities }) {
                         <View key={necessities.id}>
 
                             <View style={styles.listItem}>
-                                 <Image style={styles.img} source= { {uri: necessities.img_nec_url }}></Image>
+                                 {/* <Image style={styles.img} source= { {uri: necessities.img_nec_url.replace('localhost', '10.0.0.107')}}></Image> */}
                                 <Text style={styles.owner}>{necessities.name}</Text>
                                
                                 <Text style={styles.breed}>{necessities.inst}</Text>
