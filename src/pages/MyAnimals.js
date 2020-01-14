@@ -2,43 +2,37 @@ import React, { useState, useEffect} from 'react';
 import {SafeAreaView, View, Text, StyleSheet,Image, AsyncStorage, TouchableOpacity} from 'react-native';
 import api from '../services/api'
 
-import AnimalList from '../components/AnimalList'
-
-// import logo from '../assets/logo.png'
-// import back from '../../assets/icons/back.png'
 import Navbar from '../components/Navbar';
+import MyAnimalList from '../components/MyAnimalList';
+
 
 export default function List( {navigation} ) {
 
-    logout = async () => {
-        await AsyncStorage.clear();
-        navigation.navigate('Login');
-      };
-
-
-    const [animals, setAnimals] = useState([]);
-    const [username, setUsername] = useState('');
-
-    
-    const fetchData = async() => {
-        const response = await api.get('/animals');
-
-        await setAnimals(response.data.animals);
-    }
+    const [myAnimals, setMyAnimals] = useState([]);
 
     useEffect(() => {
-        AsyncStorage.getItem('name').then(name => {
-            setUsername(name);
-        });
+        async function loadMyAnimals(){
 
-        fetchData( );
-    }, []);
+           const user_id = await AsyncStorage.getItem('user_id');
+            
+            const {data} = await api.get('/myAnimals', {
+                headers: { user_id }
+           });
+           console.log('user.id')
+           const { animals } = data;
+
+          await setMyAnimals(animals);
+           console.log(animals);
+        }
+        loadMyAnimals();
+    }, []); 
 return (
     <SafeAreaView style={styles.container}>
 
         <Navbar> </Navbar>
+        <MyAnimalList myAnimals= {myAnimals}> </MyAnimalList>
+        
 
-        <AnimalList animals={animals}></AnimalList>
     </SafeAreaView>
 )
 }

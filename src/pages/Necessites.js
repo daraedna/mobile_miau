@@ -3,6 +3,7 @@ import {SafeAreaView, View, Text, StyleSheet,Image, AsyncStorage, TouchableOpaci
 import api from '../services/api'
 
 import NecessiteList from '../components/NecessiteList'
+import Navbar from '../components/Navbar'
 
 import logo from '../assets/logo.png'
 import back from '../../assets/icons/back.png'

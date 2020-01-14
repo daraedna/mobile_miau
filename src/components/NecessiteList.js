@@ -14,7 +14,7 @@ export default function NecessiteList({ necessities }) {
                 necessities.map(necessities => {
                     return(
                         
-                        <View key={necessities.id}>
+                        <View key={necessities._id}>
 
                             <View style={styles.listItem}>
                                  {/* <Image style={styles.img} source= { {uri: necessities.img_nec_url.replace('localhost', '10.0.0.107')}}></Image> */}
@@ -29,7 +29,7 @@ export default function NecessiteList({ necessities }) {
                         </View>
                     )
                 }) 
-            }
+            } ? : 'Não possui Animais cadastrados'
         </ScrollView>
     ) 
 }
