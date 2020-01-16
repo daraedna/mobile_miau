@@ -31,10 +31,9 @@
     "babel-preset-expo": "^7.1.0"
   },
   "private": true,
-
-  " jest " : {
-    " modulePathIgnorePatterns " : [
+  " jest ": {
+    " modulePathIgnorePatterns ": [
       " node_modules "
-   ]
- }
+    ]
+  }
 }
