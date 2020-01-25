@@ -3,14 +3,11 @@ import { View, Text, Image, TextInput, TouchableOpacity, StyleSheet, ScrollView,
 import Modal from "react-native-modal";
 import * as ImagePicker from 'expo-image-picker';
 
-
 import api from '../services/api';
 
-import logo from '../assets/logo.png'
-
+import logo from '../assets/logo.png';
 
 export default function Register({ navigation }) {
-
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,10 +18,7 @@ export default function Register({ navigation }) {
     const [img_user, setImgUser] = useState(null);
 
     async function handleChoosePhoto() {
-        const image = await ImagePicker.launchImageLibraryAsync({
-            base64: true
-        });
-        //console.log(image)
+        const image = await ImagePicker.launchImageLibraryAsync({ base64: true });
         if (image.base64) {
             return setImgUser(image.base64);
         }
@@ -72,7 +66,6 @@ export default function Register({ navigation }) {
                     {img_user && (
                         <Image style={styles.preview}
                             source={{ uri: `data:image/jpeg;base64,${img_user}` }}
-
                         />
                     )}
                     <TouchableOpacity
@@ -164,7 +157,6 @@ export default function Register({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-
     container: {
         flex: 1,
         marginTop: 32,
@@ -179,14 +171,12 @@ const styles = StyleSheet.create({
 
 
     },
-
     preview: {
         width: 200,
         height: 200,
         marginTop: 16,
         borderRadius: 100,
     },
-
     modal: {
         display: 'flex',
         width: 200,
@@ -198,24 +188,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
 
     },
-
     modalText: {
         fontSize: 14,
         fontWeight: 'bold'
     },
-
     form: {
         alignSelf: 'stretch',
         paddingHorizontal: 32,
         marginTop: 32,
     },
-
     label: {
         fontWeight: 'bold',
         color: '#444',
         marginBottom: 8,
     },
-
     input: {
         borderWidth: 1,
         borderColor: '#ddd',
@@ -227,7 +213,6 @@ const styles = StyleSheet.create({
         borderRadius: 10
 
     },
-
     button: {
         height: 42,
         backgroundColor: '#F0CB67',
@@ -236,7 +221,6 @@ const styles = StyleSheet.create({
         borderRadius: 10
 
     },
-
     buttonText: {
         color: '#fff',
         fontWeight: 'bold',
@@ -256,5 +240,4 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: 32
     }
-
 });

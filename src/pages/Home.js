@@ -19,7 +19,7 @@ export default function Home({ navigation }) {
             ...Ionicons.font,
         });
         setLoading(true);
-        AsyncStorage.getItem('user_id').then(user => {
+        AsyncStorage.getItem('user').then(user => {
             const resetAction = StackActions.reset({
                 index: 0,
                 actions: [NavigationActions.navigate({ routeName: user ? 'All' : 'Login' })],

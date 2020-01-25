@@ -21,13 +21,7 @@ export default function Login({ navigation }) {
     async function handleSubmit() {
         try {
             const { data } = await api.post('/authenticate', { email, password });
-            const { user, token } = data;
-            const { id } = user;
-            await AsyncStorage.setItem('user_id', id);
-            await AsyncStorage.setItem('name', user.name);
-            await AsyncStorage.setItem('email', user.email);
-            await AsyncStorage.setItem('phone', JSON.stringify(user.phone));
-            await AsyncStorage.setItem('token', token);
+            await AsyncStorage.setItem('user', JSON.stringify(data));
             navigation.navigate('All');
         } catch (error) {
             console.log(error);
