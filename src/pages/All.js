@@ -13,8 +13,8 @@ export default createAppContainer(
       screen: Animals,
       navigationOptions: {
         tabBarLabel: "Inicio",
-        tabBarIcon: () => (
-          <Ionicons name="md-paw" size={30} color="#2F4FA7" />
+        tabBarIcon: ({ focused }) => (
+          <Ionicons name="md-paw" size={30} color={focused ? "#2F4FA7" : "#A9A9A9"} />
         )
       }
     },
@@ -22,8 +22,8 @@ export default createAppContainer(
       screen: Necessites,
       navigationOptions: {
         tabBarLabel: "Necessidades",
-        tabBarIcon: () => (
-          <Ionicons name="md-business" size={30} color="#2F4FA7" />
+        tabBarIcon: ({ focused }) => (
+          <Ionicons name="md-business" size={30} color={focused ? "#2F4FA7" : "#A9A9A9"} />
         )
       }
     },
@@ -31,10 +31,16 @@ export default createAppContainer(
       screen: MyAnimals,
       navigationOptions: {
         tabBarLabel: "Meus Animais",
-        tabBarIcon: () => (
-          <Ionicons name="md-add-circle" size={30} color="#2F4FA7" />
+        tabBarIcon: ({ focused }) => (
+          <Ionicons name="md-add-circle" size={30} color={focused ? "#2F4FA7" : "#A9A9A9"} />
         )
       }
     }
-  })
+  },
+    {
+      tabBarOptions: {
+        activeTintColor: "#2F4FA7",
+      },
+    }
+  )
 );

@@ -1,20 +1,15 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView} from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 
 export default function AnimalList({ animals }) {
-
-
-    return(
-
-        <ScrollView  style={styles.container}>
-
-
+    return (
+        <ScrollView style={styles.container}>
             <Text style={styles.title}>Animais</Text>
             {
                 animals.map(animals => {
-                    
-                    return(
-                        
+
+                    return (
+
                         <View key={animals._id}>
 
                             <View style={styles.listItem}>
@@ -26,35 +21,30 @@ export default function AnimalList({ animals }) {
 
                         </View>
                     )
-                }) 
+                })
             }
         </ScrollView>
-    ) 
+    )
 }
 
 const styles = StyleSheet.create({
     container: {
         marginTop: 32,
     },
-
     title: {
         fontSize: 20,
         color: '#444',
-        paddingHorizontal:20,
+        paddingHorizontal: 20,
         marginBottom: 16,
         fontWeight: 'bold'
     },
-
     listItem: {
         paddingBottom: 20,
     },
-
     img: {
-       width: '100%',
-       height: 250,
-       resizeMode: 'cover',
-       marginLeft: 0,
+        width: '100%',
+        height: 250,
+        resizeMode: 'cover',
+        marginLeft: 0,
     }
-
-
 });

@@ -8,7 +8,12 @@ import All from './pages/All';
 
 const Routes = createAppContainer(
     createStackNavigator({
-        Home: { screen: Home },
+        Home: {
+            screen: Home,
+            navigationOptions: {
+                headerShown: false,
+            }
+        },
         Login: {
             screen: Login,
             navigationOptions: {

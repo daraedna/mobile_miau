@@ -10,9 +10,9 @@ import {
     StyleSheet
 } from 'react-native';
 
-import api from '../services/api'
+import api from '../services/api';
 
-import logo from '../assets/logo.png'
+import logo from '../assets/logo.png';
 
 export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
@@ -32,10 +32,10 @@ export default function Login({ navigation }) {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     return (
-        <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} enabled>
             <Image source={logo} />
             <View style={styles.form}>
                 <Text style={styles.label}>E-MAIL *</Text>

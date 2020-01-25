@@ -1,40 +1,37 @@
-import React, { useState, useEffect} from 'react';
-import {SafeAreaView, View, Text, StyleSheet,Image, AsyncStorage, TouchableOpacity} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, View, Text, StyleSheet, Image, AsyncStorage, TouchableOpacity } from 'react-native';
 import api from '../services/api'
 
-import Navbar from '../components/Navbar';
+import Header from '../components/Header';
 import MyAnimalList from '../components/MyAnimalList';
 
 
-export default function List( {navigation} ) {
+export default function List({ navigation }) {
 
     const [myAnimals, setMyAnimals] = useState([]);
 
     useEffect(() => {
-        async function loadMyAnimals(){
+        async function loadMyAnimals() {
 
-           const user_id = await AsyncStorage.getItem('user_id');
-            
-            const {data} = await api.get('/myAnimals', {
+            const user_id = await AsyncStorage.getItem('user_id');
+
+            const { data } = await api.get('/myAnimals', {
                 headers: { user_id }
-           });
-           console.log('user.id')
-           const { animals } = data;
+            });
+            console.log('user.id')
+            const { animals } = data;
 
-          await setMyAnimals(animals);
-           console.log(animals);
+            await setMyAnimals(animals);
+            console.log(animals);
         }
         loadMyAnimals();
-    }, []); 
-return (
-    <SafeAreaView style={styles.container}>
-
-        <Navbar> </Navbar>
-        <MyAnimalList myAnimals= {myAnimals}> </MyAnimalList>
-        
-
-    </SafeAreaView>
-)
+    }, []);
+    return (
+        <SafeAreaView style={styles.container}>
+            <Header />
+            <MyAnimalList myAnimals={myAnimals}> </MyAnimalList>
+        </SafeAreaView>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -48,20 +45,20 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignSelf: 'center',
-        alignItems:'center',
+        alignItems: 'center',
         justifyContent: 'space-around',
         marginTop: 30,
     },
 
     logo: {
-    
-    }, 
+
+    },
 
     logout: {
 
     },
 
     profile: {
-      
+
     },
 });
