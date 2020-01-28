@@ -1,18 +1,52 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
+import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Animals from './pages/Animals';
-import Necessites from './pages/Necessites';
-import RegisterAnimal from './pages/RegisterAnimal';
 import All from './pages/All';
+import Profile from './pages/Profile';
+import RegisterAnimal from './pages/RegisterAnimal';
 
 const Routes = createAppContainer(
-    createSwitchNavigator({
-        Login,
-        Register,
-        All
+    createStackNavigator({
+        Home: {
+            screen: Home,
+            navigationOptions: {
+                headerShown: false,
+            }
+        },
+        Login: {
+            screen: Login,
+            navigationOptions: {
+                headerShown: false,
+            }
+        },
+        Register: {
+            screen: Register,
+            navigationOptions: {
+                headerShown: false,
+            }
+        },
+        All: {
+            screen: All,
+            navigationOptions: {
+                headerShown: false,
+            }
+        },
+        Profile: {
+            screen: Profile,
+            navigationOptions: {
+                headerShown: false,
+            }
+        },
+        RegisterAnimal: {
+            screen: RegisterAnimal,
+            navigationOptions: {
+                headerShown: false,
+            }
+        }
     })
 );
-  
+
 export default Routes;

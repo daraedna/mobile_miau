@@ -7,40 +7,39 @@ import Animals from '../pages/Animals';
 import Necessites from '../pages/Necessites';
 import MyAnimals from '../pages/MyAnimals';
 
-
-const getTabBarIcon = (navigation, focused, tintColor) => {
-  const { routeName } = navigation.state;
-  let IconComponent = Ionicons;
-  let iconName;
-  if (routeName === 'Animals') {
-    iconName = `md-information-circle${focused ? '' : '-outline'}`;
-    // We want to add badges to home tab icon
-    IconComponent = HomeIconWithBadge;
-  } else if (routeName === 'Necessites') {
-    iconName = `md-options${focused ? '' : '-outline'}`;
-  }else if (routeName === 'MyAnimals') {
-    iconName = `md-paw${focused ? '' : '-outline'}`;
-  }
-
-  // You can return any component that you like here!
-  return <IconComponent name={iconName} size={25} color={tintColor} />;
-};
-
 export default createAppContainer(
-  createBottomTabNavigator(
-    {
-      Animais: { screen: Animals},
-      Necessidades: { screen: Necessites} ,
-      MeusAnimais: { screen: MyAnimals },
+  createBottomTabNavigator({
+    Animais: {
+      screen: Animals,
+      navigationOptions: {
+        tabBarLabel: "Inicio",
+        tabBarIcon: ({ focused }) => (
+          <Ionicons name="md-paw" size={30} color={focused ? "#2F4FA7" : "#A9A9A9"} />
+        )
+      }
     },
+    Necessidades: {
+      screen: Necessites,
+      navigationOptions: {
+        tabBarLabel: "Necessidades",
+        tabBarIcon: ({ focused }) => (
+          <Ionicons name="md-business" size={30} color={focused ? "#2F4FA7" : "#A9A9A9"} />
+        )
+      }
+    },
+    MeusAnimais: {
+      screen: MyAnimals,
+      navigationOptions: {
+        tabBarLabel: "Meus Animais",
+        tabBarIcon: ({ focused }) => (
+          <Ionicons name="md-add-circle" size={30} color={focused ? "#2F4FA7" : "#A9A9A9"} />
+        )
+      }
+    }
+  },
     {
-      defaultNavigationOptions: ({ navigation }) => ({
-        tabBarIcon: ({ focused, tintColor }) =>
-          getTabBarIcon(navigation, focused, tintColor),
-      }),
       tabBarOptions: {
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
+        activeTintColor: "#2F4FA7",
       },
     }
   )

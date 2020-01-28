@@ -1,57 +1,33 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView} from 'react-native';
+import { View, Text } from 'react-native';
+import { Content, List, ListItem, Thumbnail, Left, Body } from 'native-base';
 
-export default function MyAnimalList ( { myAnimals } ) {
-        return (
-            <ScrollView style={styles.container} >
-                <Text style={styles.title}> Meus animais cadastrados </Text>
+export default function MyAnimalList({ myAnimals }) {
+    return (
+        <Content>
+            <List>
                 {
-                    (myAnimals =! []) ?
-                    myAnimals.map(animal => {
-                        return(
-                            <View key={animal._id}>
-    
-                                <View style={styles.listItem}>
-                                    <Image style={styles.img} source={{ uri: animal.img_url.replace('localhost', '10.0.0.107') }} />
-                                    <Text >{animal.species}</Text>
-                                    <Text >{animal.breed}</Text>
-                                    <Text >{animal.age}</Text>
-                                    <Text >{animal.size}</Text>
-                                    <Text >{animal.observation}</Text>
+                    myAnimals.map(animal => (
+                        <ListItem thumbnail key={animal._id}>
+                            <Left>
+                                <Thumbnail square source={{ uri: `data:image/jpeg;base64,${animal.img}` }} />
+                            </Left>
+                            <Body>
+                                <View style={{ flex: 1, flexDirection: 'column' }}>
+                                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                                        <Text style={{ marginRight: 4 }}>Raça:</Text>
+                                        <Text style={{ color: '#828282'}}>{animal.breed}</Text>
+                                    </View>
+                                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                                        <Text style={{ marginRight: 4 }}>Idade:</Text>
+                                        <Text style={{ color: '#828282'}}>{animal.age}</Text>
+                                    </View>
                                 </View>
-    
-    
-                            </View>
-                        )
-                    }) : <Text> Não possui animais cadastrados </Text>
-                } 
-
-            </ScrollView>
-        );
-    }
-    const styles = StyleSheet.create({
-        container: {
-            marginTop: 32,
-        },
-    
-        title: {
-            fontSize: 20,
-            color: '#444',
-            paddingHorizontal:20,
-            marginBottom: 16,
-            fontWeight: 'bold'
-        },
-    
-        listItem: {
-            paddingBottom: 20,
-        },
-    
-        img: {
-           width: '100%',
-           height: 250,
-           resizeMode: 'cover',
-           marginLeft: 0,
-        }
-    
-    
-    });
+                            </Body>
+                        </ListItem>
+                    ))
+                }
+            </List>
+        </Content>
+    );
+};
