@@ -4,7 +4,7 @@ import { Header as HeaderUI, Left, Right, Button } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import { StackActions, NavigationActions } from 'react-navigation';
 
-import logo from '../assets/logo.png'
+import logo from '../assets/logoWhite.png'
 
 export default function Header({ navigation, profile }) {
     const home = () => {
