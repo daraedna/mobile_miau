@@ -26,14 +26,12 @@ export default function List({ navigation }) {
     };
 
     return (
-        <Container>
+        <Container style={{ flex: 1 }}>
             <Header navigation={navigation} />
             <MyAnimalList myAnimals={myAnimals} />
-            <View style={{ flex: 1 }}>
-                <Button style={styles.float} rounded onPress={register}>
-                    <Ionicons name="md-add" size={25} color="#FFF" />
-                </Button>
-            </View>
+            <Button style={styles.float} rounded onPress={register}>
+                <Ionicons name="md-add" size={25} color="#FFF" />
+            </Button>
         </Container>
     )
 };
@@ -46,7 +44,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         right: 30,
-        bottom: 30,
+        bottom: 20,
         backgroundColor: '#2F4FA7'
     }
 });
