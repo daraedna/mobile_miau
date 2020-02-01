@@ -10,14 +10,12 @@ export default function List({ navigation }) {
     const [necessities, setNecessities] = useState([]);
 
     useEffect(() => {
+        const fetchData = async () => {
+            const response = await api.get('/necessitiesList');
+            await setNecessities(response.data.necessities);
+        };
         fetchData();
     }, []);
-
-    const fetchData = async () => {
-        const response = await api.get('/necessitiesList');
-        await setNecessities(response.data.necessities);
-        // console.log(response.data);        
-    };
 
     return (
         <Container>

@@ -10,13 +10,12 @@ export default function List({ navigation }) {
     const [animals, setAnimals] = useState([]);
 
     useEffect(() => {
+        const fetchData = async () => {
+            const response = await api.get('/animals');
+            await setAnimals(response.data.animals);
+        };
         fetchData();
-    });
-
-    const fetchData = async () => {
-        const response = await api.get('/animals');
-        await setAnimals(response.data.animals);
-    };
+    }, []);
 
     return (
         <Container>
