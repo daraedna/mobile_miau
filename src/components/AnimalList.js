@@ -2,8 +2,6 @@ import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import { Content, Thumbnail, Text } from 'native-base';
 
-import logo from '../assets/logo.png';
-
 export default function AnimalList({ animals }) {
     return (
         <Content>
@@ -11,11 +9,11 @@ export default function AnimalList({ animals }) {
                 animals.map(data => (
                     <View style={{ flex: 1, flexDirection: 'column' }} key={data.id}>
                         <View style={styles.cardHeader}>
-                            <Thumbnail small source={logo} />
+                            <Thumbnail small source={{ uri: `data:image/jpeg;base64,${data.user_img}` }} />
                             <Text style={{ marginLeft: 10 }}>{data.user}</Text>
                         </View>
                         <View>
-                            <Image source={{ uri: 'https://abrilsuperinteressante.files.wordpress.com/2018/05/filhotes-de-cachorro-alcanc3a7am-o-c3a1pice-de-fofura-com-8-semanas1.png' }}
+                            <Image source={{ uri: `data:image/jpeg;base64,${data.img}` }}
                                 style={{ height: 200, width: '100%', flex: 1 }}
                             />
                         </View>
