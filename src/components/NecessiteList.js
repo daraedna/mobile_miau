@@ -1,52 +1,79 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
+import { Content, Thumbnail, Text } from 'native-base';
+
+import logo from '../assets/logo.png';
 
 export default function NecessiteList({ necessities }) {
     return (
-        <ScrollView style={styles.container}>
-            <Text style={styles.title}>Necessidades</Text>
+        <Content>
             {
-                necessities.map(necessities => {
-                    return (
-
-                        <View key={necessities._id}>
-
-                            <View style={styles.listItem}>
-                                {/* <Image style={styles.img} source= { {uri: necessities.img_nec_url.replace('localhost', '10.0.0.107')}}></Image> */}
-                                <Text style={styles.owner}>{necessities.name}</Text>
-                                <Text style={styles.breed}>{necessities.inst}</Text>
-                                <Text style={styles.breed}>{necessities.qtd}</Text>
-                                <Text style={styles.breed}>{necessities.uni_medida}</Text>
-                            </View>
-
-
+                necessities.map(data => (
+                    <View style={{ flex: 1, flexDirection: 'column' }} key={data.id}>
+                        <View style={styles.cardHeader}>
+                            <Thumbnail small source={logo} />
+                            <Text style={{ marginLeft: 10 }}>{data.inst}</Text>
                         </View>
-                    )
-                })
+                        <View>
+                            <Image source={{ uri: data.img_nec }}
+                                style={{ height: 200, width: '100%', flex: 1 }}
+                            />
+                        </View>
+                        <View style={styles.cardFooter}>
+                            <View style={styles.cardFooterItem}>
+                                <Text style={styles.cardFooterItemText}>Nome:</Text>
+                                <Text style={styles.cardNote} note>{data.name}</Text>
+                            </View>
+                            <View style={styles.cardFooterItem}>
+                                <Text style={styles.cardFooterItemText}>Quantidade:</Text>
+                                <Text style={styles.cardNote} note>{data.qtd}</Text>
+                            </View>
+                            <View style={styles.cardFooterItem}>
+                                <Text style={styles.cardFooterItemText}>Medida:</Text>
+                                <Text style={styles.cardNote} note>{data.uni_medida}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.cardObservation}>
+                            <Text style={styles.cardObservationText}>Observação:</Text>
+                            <Text style={styles.cardNote} note>{data.observation}</Text>
+                        </View>
+                    </View>
+                ))
             }
-        </ScrollView>
+        </Content>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: 32,
+    cardHeader: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 12
     },
-    title: {
-        fontSize: 20,
-        color: '#444',
-        paddingHorizontal: 20,
-        marginBottom: 16,
-        fontWeight: 'bold'
+    cardFooter: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: 10
     },
-    listItem: {
-        paddingBottom: 20,
-
+    cardFooterItem: {
+        flexDirection: 'column',
+        justifyContent: 'flex-start'
     },
-    img: {
-        width: '100%',
-        height: 250,
-        resizeMode: 'cover',
-        marginLeft: 0,
+    cardFooterItemText: {
+        color: '#2F4FA7'
+    },
+    cardObservation: {
+        paddingLeft: 10,
+        paddingBottom: 10
+    },
+    cardObservationText: {
+        color: 'grey',
+        fontSize: 15
+    },
+    cardNote: {
+        fontSize: 12
     }
 });
