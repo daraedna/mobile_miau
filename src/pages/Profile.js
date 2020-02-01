@@ -25,7 +25,7 @@ export default function Profile({ navigation }) {
                     <Thumbnail source={{ uri: `data:image/jpeg;base64,${user.img_user}` }} />
                     <Item stackedLabel style={styles.item}>
                         <Label>Nome</Label>
-                        <Input value={'Teste'} />
+                        <Input value={user.name} />
                     </Item>
                     <Item stackedLabel style={styles.item}>
                         <Label>E-mail</Label>
