@@ -6,6 +6,7 @@ import NecessiteList from '../components/NecessiteList'
 
 import api from '../services/api';
 
+
 export default function List({ navigation }) {
     const [necessities, setNecessities] = useState([]);
 

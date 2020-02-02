@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Linking} from 'react-native';
 import { Content, Thumbnail, Text } from 'native-base';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function AnimalList({ animals }) {
     return (
@@ -11,12 +12,21 @@ export default function AnimalList({ animals }) {
                         <View style={styles.cardHeader}>
                             <Thumbnail small source={{ uri: `data:image/jpeg;base64,${data.user_img}` }} />
                             <Text style={{ marginLeft: 10 }}>{data.user}</Text>
+
+                            <View style={styles.cardContato}> 
+                                <Ionicons onPress={()=>{Linking.openURL(`tel: ${data.user_phone}`)}} name="md-call" size={30} color={"green"} />
+                            </View>
                         </View>
+
+                       
+
                         <View>
                             <Image source={{ uri: `data:image/jpeg;base64,${data.img}` }}
                                 style={{ height: 200, width: '100%', flex: 1 }}
                             />
                         </View>
+                     
+
                         <View style={styles.cardFooter}>
                             <View style={styles.cardFooterItem}>
                                 <Text style={styles.cardFooterItemText}>Espécie:</Text>
@@ -39,6 +49,7 @@ export default function AnimalList({ animals }) {
                             <Text style={styles.cardObservationText}>Observação:</Text>
                             <Text style={styles.cardNote} note>{data.observation}</Text>
                         </View>
+
                     </View>
                 ))
             }
@@ -53,6 +64,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 12
     },
+    cardContato:{
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        padding: 5,
+    },
+
     cardFooter: {
         flex: 1,
         flexDirection: 'row',

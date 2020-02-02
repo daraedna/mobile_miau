@@ -15,7 +15,7 @@ export default function NecessiteList({ necessities }) {
                             <Text style={{ marginLeft: 10 }}>{data.inst}</Text>
                         </View>
                         <View>
-                            <Image source={{ uri: data.img_nec }}
+                            <Image source={{ uri: data.img_nec_url.replace('10.0.0.104', '10.0.0.107') }}
                                 style={{ height: 200, width: '100%', flex: 1 }}
                             />
                         </View>

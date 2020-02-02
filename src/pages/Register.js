@@ -78,7 +78,7 @@ export default function Register({ navigation }) {
 
                     <Text style={styles.label}>NOME *</Text>
                     <TextInput style={styles.input}
-                        placeholder="Seu nome"
+                        placeholder="João Luís"
                         placeholderTextColor="#999"
                         autoCapitalize="none"
                         autoCorrect={false}
@@ -88,7 +88,7 @@ export default function Register({ navigation }) {
 
                     <Text style={styles.label}>E-MAIL *</Text>
                     <TextInput style={styles.input}
-                        placeholder="Seu e-mail"
+                        placeholder="joao@gmail.com"
                         placeholderTextColor="#999"
                         keyboardType="email-address"
                         autoCapitalize="none"
@@ -110,7 +110,7 @@ export default function Register({ navigation }) {
 
                     <Text style={styles.label}>CONTATO *</Text>
                     <TextInput style={styles.input}
-                        placeholder="Telefone p/ contato"
+                        placeholder="84999999999"
                         placeholderTextColor="#999"
                         // keyboardType="tel"
                         autoCapitalize="none"
