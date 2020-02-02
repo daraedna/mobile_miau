@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Linking } from 'react-native';
 import { Content, Thumbnail, Text } from 'native-base';
+import { Ionicons } from '@expo/vector-icons';
 
-import logo from '../assets/logo.png';
+import icon from '../../assets/icon.png';
 
 export default function NecessiteList({ necessities }) {
     return (
@@ -11,8 +12,12 @@ export default function NecessiteList({ necessities }) {
                 necessities.map(data => (
                     <View style={{ flex: 1, flexDirection: 'column' }} key={data.id}>
                         <View style={styles.cardHeader}>
-                            <Thumbnail small source={logo} />
+                            <Thumbnail small source={icon} />
                             <Text style={{ marginLeft: 10 }}>{data.inst}</Text>
+
+                            <View style={styles.cardContato}> 
+                                <Ionicons onPress={()=>{Linking.openURL(`tel: ${data.phoneInst}`)}} name="md-call" size={30} color={"green"} />
+                            </View>
                         </View>
                         <View>
                             <Image source={{ uri: data.img_nec_url.replace('10.0.0.104', '10.0.0.107') }}
@@ -50,6 +55,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 12
+    },
+    cardContato:{
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        padding: 5,
     },
     cardFooter: {
         flex: 1,
