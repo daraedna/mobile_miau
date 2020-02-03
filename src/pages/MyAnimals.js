@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AsyncStorage, View, StyleSheet, Text } from 'react-native';
+import { AsyncStorage, StyleSheet, Alert } from 'react-native';
 import { Container, Button } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -9,7 +9,7 @@ import MyAnimalList from '../components/MyAnimalList';
 import api from '../services/api';
 
 export default function List({ navigation }) {
-    
+
     const [myAnimals, setMyAnimals] = useState([]);
 
     useEffect(() => {
@@ -17,7 +17,7 @@ export default function List({ navigation }) {
             const user_id = JSON.parse(await AsyncStorage.getItem('user')).user._id;
             const { data } = await api.get('/myAnimals', { headers: { user_id } });
             const { animals } = data;
-            await setMyAnimals(animals);
+            setMyAnimals(animals);
         };
         loadMyAnimals();
     });
@@ -26,11 +26,26 @@ export default function List({ navigation }) {
         navigation.navigate('RegisterAnimal');
     };
 
+    const alertAnimal = (id) => {
+        Alert.alert('Excluir', 'Você tem certeza ?', [
+            { text: 'Não', style: 'cancel' },
+            { text: 'Sim', onPress: () => deleteAnimal(id) }
+        ]);
+    };
+
+    const deleteAnimal = async (id) => {
+        const user_id = JSON.parse(await AsyncStorage.getItem('user')).user._id;
+        const { data } = await api.delete(`/animals/${id}`, {
+            headers: { user_id },
+        });
+        const { animals } = data;
+        setMyAnimals(animals);
+    };
 
     return (
         <Container style={{ flex: 1 }}>
             <Header navigation={navigation} />
-            <MyAnimalList myAnimals={myAnimals} />
+            <MyAnimalList myAnimals={myAnimals} deleteAnimal={alertAnimal} />
             <Button style={styles.float} rounded onPress={register}>
                 <Ionicons name="md-add" size={25} color="#FFF" />
             </Button>

@@ -15,7 +15,7 @@ export default function List({ navigation }) {
             await setAnimals(response.data.animals);
         };
         fetchData();
-    }, []);
+    });
 
     return (
         <Container>
