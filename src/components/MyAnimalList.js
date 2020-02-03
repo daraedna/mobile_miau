@@ -1,8 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Alert, AsyncStorage } from 'react-native';
 import { Content, List, ListItem, Thumbnail, Left, Body } from 'native-base';
 
+import { alertExcluir } from   '../components/Delete';
+
+
 export default function MyAnimalList({ myAnimals }) {
+
     return (
         <Content>
             <List>
@@ -21,6 +25,9 @@ export default function MyAnimalList({ myAnimals }) {
                                     <View style={{ flex: 1, flexDirection: 'row' }}>
                                         <Text style={{ marginRight: 4 }}>Idade:</Text>
                                         <Text style={{ color: '#828282'}}>{animal.age}</Text>
+                                    </View>
+                                    <View> 
+                                        <Text onPress= {alertExcluir} style={{ color: 'red'}} > Apagar </Text>
                                     </View>
                                 </View>
                             </Body>

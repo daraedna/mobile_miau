@@ -18,6 +18,8 @@ export default function List({ navigation }) {
         fetchData();
     }, []);
 
+
+
     return (
         <Container>
             <Header navigation={navigation} />

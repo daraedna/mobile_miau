@@ -9,6 +9,7 @@ import MyAnimalList from '../components/MyAnimalList';
 import api from '../services/api';
 
 export default function List({ navigation }) {
+    
     const [myAnimals, setMyAnimals] = useState([]);
 
     useEffect(() => {
@@ -24,6 +25,7 @@ export default function List({ navigation }) {
     const register = () => {
         navigation.navigate('RegisterAnimal');
     };
+
 
     return (
         <Container style={{ flex: 1 }}>
